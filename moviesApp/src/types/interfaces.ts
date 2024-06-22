@@ -9,6 +9,7 @@ export interface BaseMovieProps {
     release_date: string;
     vote_average: number;
     popularity: number;
+    genre_ids?: number[];
     poster_path?: string;
     tagline: string;
     runtime: number;
@@ -16,6 +17,8 @@ export interface BaseMovieProps {
     vote_count: number;
     favourite?: boolean;
   }
+
+  export type FilterOption = "title" | "genre";
 
   export interface BaseMovieListProps { 
     movies: BaseMovie[];
