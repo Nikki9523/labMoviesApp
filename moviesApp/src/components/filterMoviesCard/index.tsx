@@ -1,6 +1,7 @@
 import React, { useState, useEffect, ChangeEvent } from "react";
 import Card from "@mui/material/Card";
 import CardContent from "@mui/material/CardContent";
+import { FilterOption } from "../../types/interfaces";
 import Typography from "@mui/material/Typography";
 import InputLabel from "@mui/material/InputLabel";
 import MenuItem from "@mui/material/MenuItem";
@@ -24,15 +25,19 @@ const styles = {
 };
 
 interface FilterMoviesCardProps {
-  titleFilter: string;
-  genreFilter: string;
-}
+    onUserInput: (f: FilterOption, s: string) => void; // Add this line
+    titleFilter: string;
+    genreFilter: string;
+  }
 
-const FilterMoviesCard: React.FC<FilterMoviesCardProps> = ({
-  titleFilter,
-  genreFilter,
-}) => {
-  const [genres, setGenres] = useState([{ id: "0", name: "All" }]);
+  
+
+  const FilterMoviesCard: React.FC<FilterMoviesCardProps> = ({
+    titleFilter,
+    genreFilter,
+    onUserInput,
+  }) => {
+    const [genres, setGenres] = useState([{ id: "0", name: "All" }]);
 
   useEffect(() => {
     fetch(
@@ -54,7 +59,7 @@ const FilterMoviesCard: React.FC<FilterMoviesCardProps> = ({
     value: string
   ) => {
     e.preventDefault();
-    // Completed later
+    onUserInput(type, value);
   };
 
   const handleTextChange = (e: ChangeEvent<HTMLInputElement>) => {
