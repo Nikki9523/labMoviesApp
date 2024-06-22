@@ -5,6 +5,8 @@ import { useQueries } from "react-query";
 import { getMovie } from "../api/tmdb-api";
 import Spinner from "../components/spinner";
 import useFiltering from "../hooks/useFiltering";
+import RemoveFromFavourites from "../components/cardIcons/removeFromFavourites";
+import WriteReview from "../components/cardIcons/writeReview";
 import MovieFilterUI, {
   titleFilter,
   genreFilter,
@@ -56,14 +58,19 @@ const FavouriteMoviesPage: React.FC = () => {
     setFilterValues(updatedFilterSet);
   };
 
-  const toDo = () => true;
-
   return (
     <>
-      <PageTemplate
+   <PageTemplate
         title="Favourite Movies"
         movies={displayedMovies}
-        selectFavourite={toDo}
+        action={(movie) => {
+          return (
+            <>
+              <RemoveFromFavourites {...movie} />
+              <WriteReview {...movie} />
+            </>
+          );
+        }}
       />
       <MovieFilterUI
         onFilterValuesChange={changeFilterValues}

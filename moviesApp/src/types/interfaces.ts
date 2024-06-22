@@ -51,10 +51,10 @@ export interface BaseMovieProps {
     images: MovieImage[];
   }
 
-  export interface MovieListPageTemplateProps extends BaseMovieListProps {
-    title: string;
+  export interface BaseMovieListProps {
+    movies: BaseMovieProps[];
+    action: (m: BaseMovieProps) => React.ReactNode;
   }
-
   export interface Review{
     id: string;
     content: string
