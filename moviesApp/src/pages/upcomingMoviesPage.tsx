@@ -11,6 +11,10 @@ import Spinner from "../components/spinner";
 import AddToFavouritesIcon from '../components/cardIcons/addToFavourites'
 import AddToPlaylistIcon from "../components/cardIcons/addToPlaylist";
 
+/*caching was already implemented when I was working on ex. 2 as
+I based the implementation on the homePage implementation so I used react-query
+and removed the redundant useEffect hook.
+*/
 
 const titleFiltering = {
     name: "title",
