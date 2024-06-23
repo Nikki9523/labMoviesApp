@@ -9,8 +9,10 @@ const AddToPlaylistIcon: React.FC<BaseMovieProps> = (movie) => {
 
   const onUserSelect = (e: MouseEvent<HTMLButtonElement>) => {
     e.preventDefault();
-  //  context.addToFavourites(movie);
-  }
+    context.addToMustWatch(movie);
+    console.log(context.mustWatch);
+  };
+
   return (
     <IconButton aria-label="add to playlist" onClick={onUserSelect}>
       <PlaylistAddIcon color="primary" fontSize="large" />
