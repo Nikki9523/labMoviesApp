@@ -65,7 +65,16 @@ export const getMovies = () => {
 
   export const getUpcomingMovies = () => {
     return fetch(
-      `https://api.themoviedb.org/3/movie/upcoming?api_key=${import.meta.env.VITE_TMDB_KEY}&language=en-US&include_adult=false&page=1`
+      `https://api.themoviedb.org/3/movie/upcoming?api_key=https://api.themoviedb.org/3/discover/movie?api_key=${import.meta.env.VITE_TMDB_KEY}
+&include_adult=false&include_video=false&language=en-US&page=1&sort_by=popularity.desc&language=en-US&include_adult=false&page=1`
+    )
+      .then(res => res.json())
+  };
+
+  export const getPopularMovies = () => {
+    return fetch(
+      `https://api.themoviedb.org/3/discover/movie?api_key=${import.meta.env.VITE_TMDB_KEY}
+&include_adult=false&include_video=false&language=en-US&page=1&sort_by=popularity.desc`
     )
       .then(res => res.json())
   };
