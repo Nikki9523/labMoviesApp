@@ -65,8 +65,7 @@ export const getMovies = () => {
 
   export const getUpcomingMovies = () => {
     return fetch(
-      `https://api.themoviedb.org/3/movie/upcoming?api_key=https://api.themoviedb.org/3/discover/movie?api_key=${import.meta.env.VITE_TMDB_KEY}
-&include_adult=false&include_video=false&language=en-US&page=1&sort_by=popularity.desc&language=en-US&include_adult=false&page=1`
+     `https://api.themoviedb.org/3/movie/upcoming?api_key=${import.meta.env.VITE_TMDB_KEY}&language=en-US&include_adult=false&page=1`
     )
       .then(res => res.json())
   };
@@ -77,4 +76,32 @@ export const getMovies = () => {
 &include_adult=false&include_video=false&language=en-US&page=1&sort_by=popularity.desc`
     )
       .then(res => res.json())
+  };
+
+  export const getTvSeries = (id: string) => {
+    return fetch(
+      `https://api.themoviedb.org/3/tv/${id}?api_key=${import.meta.env.VITE_TMDB_KEY}&include_adult=false`
+    ).then((response) => {
+      if (!response.ok) {
+        throw new Error(`Failed to get TV series data. Response status: ${response.status}`);
+      }
+      return response.json();
+    })
+      .catch((error) => {
+        throw error;
+      });
+  };
+
+  export const getAllTvSeries = () => {
+    return fetch(
+      `https://api.themoviedb.org/3/discover/tv?api_key=${import.meta.env.VITE_TMDB_KEY}&include_adult=false&include_null_first_air_dates=false&language=en-US&page=1&sort_by=popularity.desc`
+    ).then((response) => {
+      if (!response.ok) {
+        throw new Error(`Failed to get TV series data. Response status: ${response.status}`);
+      }
+      return response.json();
+    })
+      .catch((error) => {
+        throw error;
+      });
   };

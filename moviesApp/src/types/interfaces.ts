@@ -22,7 +22,7 @@ export interface BaseMovieProps {
 
   export interface BaseMovieListProps {
     movies: BaseMovieProps[];
-    selectFavourite: (movieId: number) => void;  //add this
+    selectFavourite: (movieId: number) => void;
   }
 
   export interface MovieDetailsProps extends BaseMovieProps {
@@ -34,6 +34,10 @@ export interface BaseMovieProps {
         iso_3166_1: string;
         name: string;
       }[];
+  }
+
+  export interface MovieListPageTemplateProps extends BaseMovieListProps {
+    title: string;
   }
 
   export interface MovieImage {
@@ -81,4 +85,41 @@ export interface BaseMovieProps {
     total_pages: number;
     total_results: number;
     results: BaseMovieProps[];
+  }
+
+  export interface BaseTvSeriesProps {
+    name: string;
+    id: number;
+    overview: string;
+    poster_path?: string;
+    release_date: string;
+    vote_average: number;
+    genre_ids?: number[];
+  }
+
+  export interface BaseTvSeriesListProps {
+    tvSeries: BaseTvSeriesProps[];
+    action: (tvSeries: BaseTvSeriesProps) => React.ReactNode;
+  }
+
+  export interface TVSeriesListPageTemplateProps extends BaseTvSeriesListProps {
+    title: string;
+  }
+
+  export interface TvSeriesImage {
+    file_path: string;
+    aspect_ratio?: number;
+    height?: number;
+    iso_639_1?: string;
+    vote_average?: number;
+    vote_count?: number;
+    width?: number;
+  }
+
+
+  export interface DiscoverTvSeries {
+    page: number;	
+    total_pages: number;
+    total_results: number;
+    results: BaseTvSeriesProps[];
   }
