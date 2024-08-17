@@ -22,16 +22,23 @@ const styles = {
   },
 };
 
-interface TVSeriesProps {
+interface TvSeriesCardProps {
     tvSeries: BaseTvSeriesProps;
     action: (tvSeries: BaseTvSeriesProps) => React.ReactNode;
   }
 
-const tvSeriesCard: React.FC<TVSeriesProps> = (tvSeries) => {
+  const TvSeriesCard: React.FC<TvSeriesCardProps> = ({tvSeries, action}) => {
+
 
   return (
     <Card sx={styles.card}>
-      <CardHeader title={tvSeries.name} />
+    <CardHeader
+      title={
+        <Typography variant="h5" component="p">
+          {tvSeries.name}{" "}
+        </Typography>
+      }
+    />
       <CardMedia
         sx={styles.media}
         image={
@@ -56,16 +63,8 @@ const tvSeriesCard: React.FC<TVSeriesProps> = (tvSeries) => {
           </Grid>
         </Grid>
       </CardContent>
-      <CardActions disableSpacing>
-        <IconButton aria-label="add to favorites" >
-          <FavoriteIcon color="primary" fontSize="large" />
-        </IconButton>
-        <Button variant="outlined" size="medium" color="primary">
-          More Info ...
-        </Button>
-      </CardActions>
     </Card>
   );
-}
+};
 
-export default tvSeriesCard;
+export default TvSeriesCard;

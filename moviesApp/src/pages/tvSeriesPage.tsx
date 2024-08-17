@@ -1,22 +1,13 @@
 import React from "react";
-//import TvSeriesListPageTemplate from "../components/templateTvSeriesListPage";
+import TvSeriesListPageTemplate from "../components/templateTvSeriesListPage";
 //import AddToTvSeriesFavouritesIcon from "../components/cardIcons/addToTvSeriesFavourites";
-import { BaseTvSSeriesProps } from "../types/interfaces";
-//import { getTvSeries } from "../api/tmdb-api";
+import { BaseTvSeriesProps } from "../types/interfaces";
+import { getAllTvSeries } from "../api/tmdb-api";
 import useFiltering from "../hooks/useFiltering";
-//import TvSeriesFilterUi, { titleFilter, genreFilter } from "../components/tvSeriesFilterUi"; 
-//import { DiscoverTvShows } from "../types/interfaces";
-import MovieFilterUI, {
-    titleFilter,
-    genreFilter,
-  } from "../components/movieFilterUI";
-
+import TvSeriesFilterUI, { titleFilter, genreFilter } from "../components/tvSeriesFilterUI"; 
+import { DiscoverTvSeries } from "../types/interfaces";
 import { useQuery } from "react-query";
 import Spinner from "../components/spinner";
-
-import PageTemplate from "../components/templateMovieListPage";
-import { getPopularMovies } from "../api/tmdb-api";
-import AddToPlaylistIcon from "../components/cardIcons/addToPlaylist";
 
 
 const titleFiltering = {
@@ -31,7 +22,7 @@ const titleFiltering = {
   };
   
   const TvSeriesPage: React.FC = () => {
-    const { data, error, isLoading, isError } = useQuery<DiscoverMovies, Error>("popular", getPopularMovies);
+    const { data, error, isLoading, isError } = useQuery<DiscoverTvSeries, Error>("discoverTvSeries", getAllTvSeries);
     const { filterValues, setFilterValues, filterFunction } = useFiltering(
       [titleFiltering, genreFiltering]
     );
@@ -54,25 +45,20 @@ const titleFiltering = {
       setFilterValues(updatedFilterSet);
     };
 
-    const movies = data ? data.results : [];
-    const displayedMovies = filterFunction(movies);
+    const tvSeries = data ? data.results : [];
+    const displayedTvSeries = filterFunction(tvSeries);
 
     return (
         <>
-          <PageTemplate
-            title="Popular Movies"
-            movies={displayedMovies}
-            action={(movie: BaseMovieProps) => {
-              return <AddToPlaylistIcon {...movie} />
+          <TvSeriesListPageTemplate
+            title="Discover TV Series"
+            tvSeries={displayedTvSeries}
+            action={(tvSeries: BaseTvSeriesProps) => {
+               return console.log(tvSeries.id);
             }}
           />
-    <MovieFilterUI
-      onFilterValuesChange={changeFilterValues}
-      titleFilter={filterValues[0].value}
-      genreFilter={filterValues[1].value}
-    />
-  </>
-  );
-  }
+        </>
+      );
+    };
 
   export default TvSeriesPage;

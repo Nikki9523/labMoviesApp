@@ -94,6 +94,7 @@ export interface BaseMovieProps {
     poster_path?: string;
     release_date: string;
     vote_average: number;
+    genre_ids?: number[];
   }
 
   export interface BaseTvSeriesListProps {
@@ -113,4 +114,12 @@ export interface BaseMovieProps {
     vote_average?: number;
     vote_count?: number;
     width?: number;
+  }
+
+
+  export interface DiscoverTvSeries {
+    page: number;	
+    total_pages: number;
+    total_results: number;
+    results: BaseTvSeriesProps[];
   }
