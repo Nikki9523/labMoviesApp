@@ -36,6 +36,10 @@ export interface BaseMovieProps {
       }[];
   }
 
+  export interface MovieListPageTemplateProps extends BaseMovieListProps {
+    title: string;
+  }
+
   export interface MovieImage {
     file_path: string;
     aspect_ratio?: number;
@@ -83,8 +87,30 @@ export interface BaseMovieProps {
     results: BaseMovieProps[];
   }
 
-  export interface BaseTvShowProps {
+  export interface BaseTvSeriesProps {
     name: string;
     id: number;
     overview: string;
+    poster_path?: string;
+    release_date: string;
+    vote_average: number;
+  }
+
+  export interface BaseTvSeriesListProps {
+    tvSeries: BaseTvSeriesProps[];
+    action: (tvSeries: BaseTvSeriesProps) => React.ReactNode;
+  }
+
+  export interface TVSeriesListPageTemplateProps extends BaseTvSeriesListProps {
+    title: string;
+  }
+
+  export interface TvSeriesImage {
+    file_path: string;
+    aspect_ratio?: number;
+    height?: number;
+    iso_639_1?: string;
+    vote_average?: number;
+    vote_count?: number;
+    width?: number;
   }
