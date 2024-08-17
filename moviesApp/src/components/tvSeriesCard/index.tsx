@@ -22,8 +22,12 @@ const styles = {
   },
 };
 
-const tvSeriesCard: React.FC<BaseTvSeriesProps> = (tvSeries) => {
- 
+interface TVSeriesProps {
+    tvSeries: BaseTvSeriesProps;
+    action: (tvSeries: BaseTvSeriesProps) => React.ReactNode;
+  }
+
+const tvSeriesCard: React.FC<TVSeriesProps> = (tvSeries) => {
 
   return (
     <Card sx={styles.card}>
