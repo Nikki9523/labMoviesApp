@@ -22,7 +22,7 @@ export interface BaseMovieProps {
 
   export interface BaseMovieListProps {
     movies: BaseMovieProps[];
-    selectFavourite: (movieId: number) => void;  //add this
+    selectFavourite: (movieId: number) => void;
   }
 
   export interface MovieDetailsProps extends BaseMovieProps {
@@ -81,4 +81,10 @@ export interface BaseMovieProps {
     total_pages: number;
     total_results: number;
     results: BaseMovieProps[];
+  }
+
+  export interface BaseTvShowProps {
+    name: string;
+    id: number;
+    overview: string;
   }
