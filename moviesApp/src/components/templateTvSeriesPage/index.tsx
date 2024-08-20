@@ -11,13 +11,12 @@ const styles = {
     gridListRoot: {
         display: "flex",
         flexWrap: "wrap",
-        justifyContent: "space-around",
+        justifyContent: "space-around"
     },
     gridListTile: {
-        width: 450,
-        height: '100vh',
+
     },
-};
+}
 
 interface TemplateTvSeriesPageProps {
     tvSeries: TvDetailsProps;
@@ -46,19 +45,20 @@ const TemplateTvPage: React.FC<TemplateTvSeriesPageProps> = ({tvSeries, children
     return (
         <>
 
+
             <Grid container spacing={5} style={{ padding: "15px" }}>
                 <Grid item xs={3}>
                     <div>
-                        <ImageList cols={1}>
+                    <ImageList sx={{ width: 500, height: 450 }} cols={3} rowHeight={164}>
                             {images.map((image: TvSeriesImage) => (
                                 <ImageListItem
                                     key={image.file_path}
-                                    sx={styles.gridListTile}
                                     cols={1}
                                 >
                                     <img
                                         src={`https://image.tmdb.org/t/p/w500/${image.file_path}`}
                                         alt={'Image alternative'}
+                                        loading="lazy"
                                     />
                                 </ImageListItem>
                             ))}
