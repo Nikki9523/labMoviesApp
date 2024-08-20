@@ -80,7 +80,7 @@ export const getMovies = () => {
 
   export const getTvSeries = (id: string) => {
     return fetch(
-      `https://api.themoviedb.org/3/tv/${id}?api_key=${import.meta.env.VITE_TMDB_KEY}&include_adult=false`
+      `https://api.themoviedb.org/3/tv/${id}?api_key=${import.meta.env.VITE_TMDB_KEY}`
     ).then((response) => {
       if (!response.ok) {
         throw new Error(`Failed to get TV series data. Response status: ${response.status}`);
@@ -103,5 +103,20 @@ export const getMovies = () => {
     })
       .catch((error) => {
         throw error;
+      });
+  };
+
+
+  export const getTvImages = (id: string | number) => {
+    return fetch(
+      `https://api.themoviedb.org/3/tv/${id}/images?api_key=${import.meta.env.VITE_TMDB_KEY}`
+    ).then((response) => {
+      if (!response.ok) {
+        throw new Error("failed to fetch images");
+      }
+      return response.json();
+    }).then((json) => json.posters)
+      .catch((error) => {
+        throw error
       });
   };
