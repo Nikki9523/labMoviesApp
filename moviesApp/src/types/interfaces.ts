@@ -94,6 +94,7 @@ export interface BaseMovieProps {
     poster_path?: string;
     release_date: string;
     vote_average: number;
+    vote_count: number;
     genre_ids?: number[];
   }
 
@@ -104,6 +105,24 @@ export interface BaseMovieProps {
 
   export interface TVSeriesListPageTemplateProps extends BaseTvSeriesListProps {
     title: string;
+  }
+
+  export interface TvDetailsProps extends BaseTvSeriesProps {
+    genres: {
+      id: number;
+      name: string;
+    }[];
+    production_countries: {
+        iso_3166_1: string;
+        name: string;
+      }[];
+
+      
+  }
+
+  export interface TvSeriesProps {
+    tvSeries: TvDetailsProps;
+    images: TvSeriesImage[];
   }
 
   export interface TvSeriesImage {
