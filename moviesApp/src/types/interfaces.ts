@@ -92,7 +92,7 @@ export interface BaseMovieProps {
     id: number;
     overview: string;
     poster_path?: string;
-    release_date: string;
+    first_air_date: string;
     vote_average: number;
     vote_count: number;
     genre_ids?: number[];

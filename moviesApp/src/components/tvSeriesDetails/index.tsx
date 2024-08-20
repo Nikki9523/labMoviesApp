@@ -43,14 +43,19 @@ const TvSeriesDetails: React.FC<TvDetailsProps> = (tvSeries) => {
                 <li>
                     <Chip label="Genres" sx={styles.chipLabel} color="primary" />
                 </li>
+                {tvSeries.genres.map((g) => (
+                    <li key={g.name}>
+                        <Chip label={g.name} />
+                    </li>
+                ))}
 
             </Paper>
             <Paper component="ul" sx={styles.chipSet}>
                 <Chip
                     icon={<StarRate />}
-                    label={`${tvSeries.vote_average} (${tvSeries.vote_count}`}
+                    label={`${tvSeries.vote_average}`}
                 />
-                <Chip label={`Released: ${tvSeries.release_date}`} />
+                <Chip label={`First aired: ${tvSeries.first_air_date}`} />
             </Paper>
             <Fab
                 color="secondary"
