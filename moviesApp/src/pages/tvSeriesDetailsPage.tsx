@@ -6,6 +6,7 @@ import { useQuery } from "react-query";
 import Spinner from '../components/spinner';
 import { TvDetailsProps } from "../types/interfaces";
 import TvSeriesDetails from "../components/tvSeriesDetails";
+import StandardImageList from "../components/imageGallery";
 
 const TvSeriesDetailsPage: React.FC= () => {
     const { id } = useParams();
@@ -26,9 +27,12 @@ const TvSeriesDetailsPage: React.FC= () => {
     <>
       {tvSeries ? (
         <>
-        <PageTemplate tvSeries ={tvSeries}> 
-          <TvSeriesDetails
-           {...tvSeries} />
+        <PageTemplate tvSeries ={tvSeries}>
+        <div className="container">
+        <TvSeriesDetails
+           {...tvSeries} /> 
+           <StandardImageList></StandardImageList>
+           </div>
         </PageTemplate>
       </>
     ) : (
