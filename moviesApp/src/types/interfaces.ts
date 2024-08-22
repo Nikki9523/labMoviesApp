@@ -18,6 +18,10 @@ export interface BaseMovieProps {
     favourite?: boolean;
   }
 
+  export interface FantasyMovie {
+    title: string
+  }
+
   export type FilterOption = "title" | "genre";
 
   export interface BaseMovieListProps {

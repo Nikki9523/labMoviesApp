@@ -1,5 +1,5 @@
 import React, { useState, useCallback } from "react";
-import { BaseMovieProps, Review } from "../types/interfaces";
+import { BaseMovieProps, FantasyMovie, Review } from "../types/interfaces";
 
 
 interface MovieContextInterface {
@@ -9,6 +9,7 @@ interface MovieContextInterface {
     addToFavourites: ((movie: BaseMovieProps) => void);
     removeFromFavourites: ((movie: BaseMovieProps) => void);
     addReview: ((movie: BaseMovieProps, review: Review) => void);
+    addMovie: ((movie: FantasyMovie) => void);
 }
 const initialContextState: MovieContextInterface = {
     favourites: [],
