@@ -36,7 +36,6 @@ const AddMovieForm: React.FC<BaseMovieProps> = () => {
   };
 
   const onSubmit: SubmitHandler<FantasyMovie> = (movie) => {
-    movie.title = title;
     context.addMovie(movie);
     console.log(movie);
     setOpen(true);
