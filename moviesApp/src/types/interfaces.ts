@@ -19,7 +19,9 @@ export interface BaseMovieProps {
   }
 
   export interface FantasyMovie {
-    title: string
+    title: string,
+    overview: string,
+    runtime: number
   }
 
   export type FilterOption = "title" | "genre";

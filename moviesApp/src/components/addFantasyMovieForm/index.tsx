@@ -11,20 +11,21 @@ import Alert from "@mui/material/Alert";
 import { BaseMovieProps, FantasyMovie } from "../../types/interfaces";
 import styles from "./styles";
 
-
 const AddMovieForm: React.FC<BaseMovieProps> = () => {
   const defaultValues = {
-      defaultValues: {
-        title: "",
-      }
-    };
-  
-    const {
-      control,
-      formState: { errors },
-      handleSubmit,
-      reset,
-    } = useForm<FantasyMovie>(defaultValues);
+    defaultValues: {
+      title: "My Fantasy Movie Title",
+      overview: "My fantasy movie description",
+      runtime: 90
+    },
+  };
+
+  const {
+    control,
+    formState: { errors },
+    handleSubmit,
+    reset,
+  } = useForm<FantasyMovie>(defaultValues);
 
   const navigate = useNavigate();
   const context = useContext(MoviesContext);
@@ -43,73 +44,109 @@ const AddMovieForm: React.FC<BaseMovieProps> = () => {
 
   return (
     <Box component="div" sx={styles.root}>
-          <Typography component="h2" variant="h3">
-            Add your dream Movie!
-          </Typography>
-          <Snackbar
+      <Typography component="h2" variant="h3">
+        Add your dream Movie!
+      </Typography>
+      <Snackbar
         sx={styles.snack}
         anchorOrigin={{ vertical: "top", horizontal: "right" }}
         open={open}
-         onClose={handleSnackClose}
+        onClose={handleSnackClose}
       >
-        <Alert
-          severity="success"
-          variant="filled"
-          onClose={handleSnackClose}
-        >
+        <Alert severity="success" variant="filled" onClose={handleSnackClose}>
           <Typography variant="h4">
             Thank you for creating your fantasy movie
           </Typography>
         </Alert>
       </Snackbar>
-          <form style={styles.form} onSubmit={handleSubmit(onSubmit)} noValidate>
-            <Controller
-              name="title"
-              control={control}
-              rules={{ required: "Movie Title is required" }}
-              defaultValue=""
-              render={({ field: { onChange, value } }) => (
-                <TextField
-                  sx={{ width: "40ch" }}
-                  variant="outlined"
-                  margin="normal"
-                  required
-                  onChange={onChange}
-                  value={value}
-                  id="title"
-                  label="Movie Title"
-                  autoFocus
-                />
-              )}
+      <form style={styles.form} onSubmit={handleSubmit(onSubmit)} noValidate>
+        <Controller
+          name="title"
+          control={control}
+          rules={{ required: "Movie Title is required" }}
+          defaultValue=""
+          render={({ field: { onChange, value } }) => (
+            <TextField
+              sx={{ width: "40ch" }}
+              variant="outlined"
+              margin="normal"
+              required
+              onChange={onChange}
+              value={value}
+              id="title"
+              label="Movie Title"
+              autoFocus
             />
+          )}
+        />
 
-       
-<Box >
-              <Button
-                type="submit"
-                variant="contained"
-                color="primary"
-                sx={styles.submit}
-              >
-                Submit
-              </Button>
-              <Button
-                type="reset"
-                variant="contained"
-                color="secondary"
-                sx={styles.submit}
-                onClick={() => {
-                  reset({
-                    title: "",
-                  });
-                }}
-              >
-                Reset
-              </Button>
-            </Box>
-          </form>
+<Controller
+          name="overview"
+          control={control}
+          rules={{ required: "Movie overview is required" }}
+          defaultValue=""
+          render={({ field: { onChange, value } }) => (
+            <TextField
+              sx={{ width: "40ch" }}
+              variant="outlined"
+              margin="normal"
+              required
+              onChange={onChange}
+              value={value}
+              id="overview"
+              label="Movie overview"
+              multiline
+              minRows={10}
+            />
+          )}
+        />
+
+        
+<Controller
+          name="runtime"
+          control={control}
+          rules={{ required: "runtime is requred" }}
+          render={({ field: { onChange, value } }) => (
+            <TextField
+              sx={{ width: "40ch" }}
+              variant="outlined"
+              margin="normal"
+              required
+              onChange={onChange}
+              value={value}
+              id="runtime"
+              type="number"
+              label="runtime in minutes"
+            />
+          )}
+        />
+
+        <Box>
+          <Button
+            type="submit"
+            variant="contained"
+            color="primary"
+            sx={styles.submit}
+          >
+            Submit
+          </Button>
+          <Button
+            type="reset"
+            variant="contained"
+            color="secondary"
+            sx={styles.submit}
+            onClick={() => {
+              reset({
+                title: "",
+              });
+            }}
+          >
+            Reset
+          </Button>
         </Box>
-      );
-    };
+      </form>
+    </Box>
+  );
+};
 
 export default AddMovieForm;
