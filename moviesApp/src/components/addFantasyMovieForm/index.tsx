@@ -35,8 +35,10 @@ const AddMovieForm: React.FC<BaseMovieProps> = () => {
     navigate("/movies");
   };
 
-  const onSubmit: SubmitHandler<FantasyMovie> = (data) => {
-    context.addMovie(data);
+  const onSubmit: SubmitHandler<FantasyMovie> = (movie) => {
+    movie.title = title;
+    context.addMovie(movie);
+    console.log(movie);
     setOpen(true);
   };
 
