@@ -12,7 +12,7 @@ import { BaseMovieProps, FantasyMovie } from "../../types/interfaces";
 import styles from "./styles";
 
 
-const AddMovieForm: React.FC<BaseMovieProps> = (movie) => {
+const AddMovieForm: React.FC<BaseMovieProps> = () => {
   const defaultValues = {
       defaultValues: {
         title: "",
