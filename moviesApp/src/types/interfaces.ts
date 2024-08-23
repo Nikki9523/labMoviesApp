@@ -21,7 +21,10 @@ export interface BaseMovieProps {
   export interface FantasyMovie {
     title: string,
     overview: string,
-    runtime: number
+    runtime: number,
+    release_date: string,
+    genre: string,
+    production_countries: string[]
   }
 
   export type FilterOption = "title" | "genre";

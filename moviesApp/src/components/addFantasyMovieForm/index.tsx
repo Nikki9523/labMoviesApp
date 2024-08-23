@@ -10,6 +10,8 @@ import Snackbar from "@mui/material/Snackbar";
 import Alert from "@mui/material/Alert";
 import { BaseMovieProps, FantasyMovie } from "../../types/interfaces";
 import styles from "./styles";
+import MenuItem from "@mui/material/MenuItem";
+import genres from "./genreCategories";
 
 const AddMovieForm: React.FC<BaseMovieProps> = () => {
   const defaultValues = {
@@ -29,16 +31,23 @@ const AddMovieForm: React.FC<BaseMovieProps> = () => {
 
   const navigate = useNavigate();
   const context = useContext(MoviesContext);
-  const [open, setOpen] = useState(false);
+  const [genre, setGenre] = useState('');
+  const [open, setOpen] = useState(false);  //NEW
+
+
+  const handleGenreChange = (event: ChangeEvent<HTMLInputElement>) => {
+    setGenre(event.target.value);
+  };
 
   const handleSnackClose = () => {
     setOpen(false);
     navigate("/movies");
   };
-
+  
   const onSubmit: SubmitHandler<FantasyMovie> = (movie) => {
     context.addMovie(movie);
     console.log(movie);
+    movie.genre = genre;
     setOpen(true);
   };
 
@@ -117,6 +126,64 @@ const AddMovieForm: React.FC<BaseMovieProps> = () => {
               id="runtime"
               type="number"
               label="runtime in minutes"
+            />
+          )}
+        />
+
+<Controller
+          name="release_date"
+          control={control}
+          rules={{ required: "release date is requred" }}
+          render={({ field: { onChange, value } }) => (
+            <TextField
+              sx={{ width: "40ch" }}
+              variant="outlined"
+              margin="normal"
+              required
+              onChange={onChange}
+              value={value}
+              id="release-date"
+              type="date"
+              label="release date"
+            />
+          )}
+        />
+
+<Controller
+              control={control}
+              name="genre"
+              render={({ field }) => (
+                <TextField
+                  {...field}
+                  id="select-genre"
+                  select
+                  variant="outlined"
+                  label="Select Main Genre"
+                  value={genres}
+                  onChange={handleGenreChange}
+                  helperText="Add the main genre of your fantasy movie"
+                >
+                  {genres.map((option) => (
+                    <MenuItem key={option.value} value={option.value}>
+                      {option.label}
+                    </MenuItem>
+                  ))}
+                </TextField>
+              )}
+            />
+            <Controller
+          name="production_countries"
+          control={control}
+          render={({ field: { onChange, value } }) => (
+            <TextField
+              sx={{ width: "40ch" }}
+              variant="outlined"
+              margin="normal"
+              onChange={onChange}
+              value={value}
+              id="production-countries"
+              label="Production Countries"
+              autoFocus
             />
           )}
         />
