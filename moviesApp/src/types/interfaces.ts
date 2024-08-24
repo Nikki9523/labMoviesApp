@@ -27,7 +27,7 @@ export interface BaseMovieProps {
     production_countries: string[]
   }
 
-  export type FilterOption = "title" | "genre";
+  export type FilterOption = "title" | "genre" | "date";
 
   export interface BaseMovieListProps {
     movies: BaseMovieProps[];
@@ -86,6 +86,12 @@ export interface BaseMovieProps {
     genres: {
       id: string;
       name: string
+    }[];
+  }
+
+  export interface DateData {
+    dates: {
+      release_date: string;
     }[];
   }
   
