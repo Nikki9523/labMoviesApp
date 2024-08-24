@@ -18,7 +18,7 @@ const AddMovieForm: React.FC<BaseMovieProps> = () => {
     defaultValues: {
       title: "My Fantasy Movie Title",
       overview: "My fantasy movie description",
-      runtime: 90
+      runtime: 90,
     },
   };
 
@@ -31,9 +31,8 @@ const AddMovieForm: React.FC<BaseMovieProps> = () => {
 
   const navigate = useNavigate();
   const context = useContext(MoviesContext);
-  const [genre, setGenre] = useState('');
-  const [open, setOpen] = useState(false);  //NEW
-
+  const [genre, setGenre] = useState("");
+  const [open, setOpen] = useState(false); //NEW
 
   const handleGenreChange = (event: ChangeEvent<HTMLInputElement>) => {
     setGenre(event.target.value);
@@ -43,7 +42,7 @@ const AddMovieForm: React.FC<BaseMovieProps> = () => {
     setOpen(false);
     navigate("/movies");
   };
-  
+
   const onSubmit: SubmitHandler<FantasyMovie> = (movie) => {
     context.addMovie(movie);
     console.log(movie);
@@ -89,7 +88,7 @@ const AddMovieForm: React.FC<BaseMovieProps> = () => {
           )}
         />
 
-<Controller
+        <Controller
           name="overview"
           control={control}
           rules={{ required: "Movie overview is required" }}
@@ -110,8 +109,7 @@ const AddMovieForm: React.FC<BaseMovieProps> = () => {
           )}
         />
 
-        
-<Controller
+        <Controller
           name="runtime"
           control={control}
           rules={{ required: "runtime is requred" }}
@@ -130,7 +128,7 @@ const AddMovieForm: React.FC<BaseMovieProps> = () => {
           )}
         />
 
-<Controller
+        <Controller
           name="release_date"
           control={control}
           rules={{ required: "release date is requred" }}
@@ -149,29 +147,29 @@ const AddMovieForm: React.FC<BaseMovieProps> = () => {
           )}
         />
 
-<Controller
-              control={control}
-              name="genre"
-              render={({ field }) => (
-                <TextField
-                  {...field}
-                  id="select-genre"
-                  select
-                  variant="outlined"
-                  label="Select Main Genre"
-                  value={genres}
-                  onChange={handleGenreChange}
-                  helperText="Add the main genre of your fantasy movie"
-                >
-                  {genres.map((option) => (
-                    <MenuItem key={option.value} value={option.value}>
-                      {option.label}
-                    </MenuItem>
-                  ))}
-                </TextField>
-              )}
-            />
-            <Controller
+        <Controller
+          control={control}
+          name="genre"
+          render={({ field }) => (
+            <TextField
+              {...field}
+              id="select-genre"
+              select
+              variant="outlined"
+              label="Select Main Genre"
+              value={genres}
+              onChange={handleGenreChange}
+              helperText="Add the main genre of your fantasy movie"
+            >
+              {genres.map((option) => (
+                <MenuItem key={option.value} value={option.value}>
+                  {option.label}
+                </MenuItem>
+              ))}
+            </TextField>
+          )}
+        />
+        <Controller
           name="production_countries"
           control={control}
           render={({ field: { onChange, value } }) => (
