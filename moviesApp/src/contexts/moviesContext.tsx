@@ -1,22 +1,26 @@
 import React, { useState, useCallback } from "react";
-import { BaseMovieProps, Review } from "../types/interfaces";
+import { BaseMovieProps, FantasyMovie, Review } from "../types/interfaces";
 
 
 interface MovieContextInterface {
     favourites: number[];
     mustWatch: number[];
+    myMovies: string[];
     addToMustWatch: ((movie: BaseMovieProps) => void);
     addToFavourites: ((movie: BaseMovieProps) => void);
     removeFromFavourites: ((movie: BaseMovieProps) => void);
     addReview: ((movie: BaseMovieProps, review: Review) => void);
+    addMovie: ((movie: FantasyMovie) => void);
 }
 const initialContextState: MovieContextInterface = {
     favourites: [],
     mustWatch: [],
+    myMovies: [],
     addToMustWatch: () => {},
     addToFavourites: () => {},
     removeFromFavourites: () => {},
     addReview: (movie, review) => { movie.id, review},
+    addMovie: () => {}
 };
 
 export const MoviesContext = React.createContext<MovieContextInterface>(initialContextState);
@@ -24,7 +28,8 @@ export const MoviesContext = React.createContext<MovieContextInterface>(initialC
 const MoviesContextProvider: React.FC<React.PropsWithChildren> = ({ children }) => {
     const [favourites, setFavourites] = useState<number[]>([]);
     const [mustWatch, setMustWatch] = useState<number[]>([]);
-    const [myReviews, setMyReviews] = useState<Review[]>( [] )
+    const [myReviews, setMyReviews] = useState<Review[]>( [] );
+    const [myMovies, setMyMovies] = useState<FantasyMovie[]>( [] );
 
     const addToFavourites = useCallback((movie: BaseMovieProps) => {
         setFavourites((prevFavourites) => {
@@ -52,6 +57,10 @@ const MoviesContextProvider: React.FC<React.PropsWithChildren> = ({ children }) 
         setMyReviews( {...myReviews, [movie.id]: review } )
       };
 
+      const addMovie = (movie:FantasyMovie) => {
+        setMyMovies( {...myMovies } )
+      };
+
 
     return (
         <MoviesContext.Provider
@@ -62,6 +71,7 @@ const MoviesContextProvider: React.FC<React.PropsWithChildren> = ({ children }) 
                 addToFavourites,
                 removeFromFavourites,
                 addReview,
+                addMovie
             }}
         >
             {children}

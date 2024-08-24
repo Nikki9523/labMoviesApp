@@ -18,6 +18,15 @@ export interface BaseMovieProps {
     favourite?: boolean;
   }
 
+  export interface FantasyMovie {
+    title: string,
+    overview: string,
+    runtime: number,
+    release_date: string,
+    genre: string,
+    production_countries: string[]
+  }
+
   export type FilterOption = "title" | "genre";
 
   export interface BaseMovieListProps {
