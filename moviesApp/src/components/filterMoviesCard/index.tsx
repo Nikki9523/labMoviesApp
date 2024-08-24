@@ -1,5 +1,5 @@
 import React, { ChangeEvent } from "react";
-import { FilterOption, GenreData } from "../../types/interfaces";
+import { FilterOption, GenreData, DateData } from "../../types/interfaces";
 import Card from "@mui/material/Card";
 import CardContent from "@mui/material/CardContent";
 import Typography from "@mui/material/Typography";
@@ -11,6 +11,7 @@ import SortIcon from "@mui/icons-material/Sort";
 import FormControl from "@mui/material/FormControl";
 import Select from "@mui/material/Select";
 import { getGenres } from "../../api/tmdb-api";
+import { getReleaseDate } from "../../api/tmdb-api";
 import { useQuery } from "react-query";
 import Spinner from '../spinner';
 
@@ -28,15 +29,17 @@ const styles = {
 };
 
 interface FilterMoviesCardProps {
-    onUserInput: (f: FilterOption, s: string) => void; // Add this line
-    titleFilter: string;
+    onUserInput: (f: FilterOption, s: string) => void;
     genreFilter: string;
+    titleFilter: string;
+    dateFilter: string;
   }
 
   
 
-  const FilterMoviesCard: React.FC<FilterMoviesCardProps> = ({ titleFilter, genreFilter, onUserInput }) => {
-    const { data, error, isLoading, isError } = useQuery<GenreData, Error>("genres", getGenres);
+  const FilterMoviesCard: React.FC<FilterMoviesCardProps> = ({ titleFilter, genreFilter, dateFilter, onUserInput }) => {
+    const {  data: genreData, error, isLoading, isError } = useQuery<GenreData, Error>("genres",getGenres);
+    const {  data: dateData } = useQuery<DateData, Error>("dates",getReleaseDate);
   
     if (isLoading) {
       return <Spinner />;
@@ -44,10 +47,12 @@ interface FilterMoviesCardProps {
     if (isError) {
       return <h1>{(error as Error).message}</h1>;
     }
-    const genres = data?.genres || [];
+    const genres = genreData?.genres || [];
     if (genres[0].name !== "All") {
       genres.unshift({ id: "0", name: "All" });
     }
+
+    const dates = dateData?.dates || [];
   
     const handleChange = (e: SelectChangeEvent, type: FilterOption, value: string) => {
       e.preventDefault()
@@ -57,6 +62,10 @@ interface FilterMoviesCardProps {
     const handleTextChange = (e: ChangeEvent<HTMLInputElement>) => {
       handleChange(e, "title", e.target.value)
     }
+
+    const handleDateChange = (e: SelectChangeEvent) => {
+      handleChange(e, "date", e.target.value)
+    };
   
     const handleGenreChange = (e: SelectChangeEvent) => {
       handleChange(e, "genre", e.target.value)
@@ -79,6 +88,16 @@ interface FilterMoviesCardProps {
             variant="filled"
             onChange={handleTextChange}
           />
+
+            <InputLabel id="date-label">Date</InputLabel>
+            <TextField
+              value={dateFilter}
+              type="date"
+              onChange={handleDateChange}
+              
+            >
+            </TextField>
+            
           <FormControl sx={styles.formControl}>
             <InputLabel id="genre-label">Genre</InputLabel>
             <Select
@@ -108,6 +127,6 @@ interface FilterMoviesCardProps {
       </Card>
     </>
   );
-};
+  }
 
 export default FilterMoviesCard;
