@@ -1,30 +1,72 @@
-# React + TypeScript + Vite
+# Project
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+This is a Movie App created for the Fullstack 2 assignment. It allows users to view, search and filter movies and tv series.
+It also allows users to submit an idea for their own movie idea.
 
-Currently, two official plugins are available:
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+## Features Added for Assignment 2
 
-## Expanding the ESLint configuration
+### UI - New views/pages:
 
-If you are developing a production application, we recommend updating the configuration to enable type aware lint rules:
+Added TvSeriesList and TvSeries Pages
+Added Tv Series and Tv Series Detail Page
+Added Fantasy Movie Page
+Added Popular Movie List Page
 
-- Configure the top-level `parserOptions` property like this:
+List view (e.g. Most popular movies, Actors, Similar movies, TV Series):
+Added Tv Series List view
+Added Popular Movie List View
 
-```js
-export default {
-  // other rules...
-  parserOptions: {
-    ecmaVersion: 'latest',
-    sourceType: 'module',
-    project: ['./tsconfig.json', './tsconfig.node.json'],
-    tsconfigRootDir: __dirname,
-  },
-}
-```
 
-- Replace `plugin:@typescript-eslint/recommended` to `plugin:@typescript-eslint/recommended-type-checked` or `plugin:@typescript-eslint/strict-type-checked`
-- Optionally add `plugin:@typescript-eslint/stylistic-type-checked`
-- Install [eslint-plugin-react](https://github.com/jsx-eslint/eslint-plugin-react) and add `plugin:react/recommended` & `plugin:react/jsx-runtime` to the `extends` list
+Detail view (e.g. Actor Bio, TV Series):
+Added Tv Series Detail view
+
+
+### Routing - New routes.
+Added:
+"/tv-series/:id"
+"/movies/create"
+"/popular"
+"/tv-series"
+
+
+### Data hyperlinking:
+Added Link to Popular Page, Add Fantasy Movie Page, Tv Series Detail Page
+
+
+### Data Model:
+Added FantasyMovie , DateData, BaseTvSeriesProps ,BaseTvSeriesListProps ,TvDetailsProps ,TvSeriesProps ,
+TvSeriesImage , DiscoverTvSeries 
+
+
+### Server state Caching - Added previously as part of lab
+
+
+### Additional filtering and/or sorting criteria.
+
+Added date filter to filtering UI. Tried to get it to work but wasn't able to filter based on release date.
+
+### My fantasy movie. (Basic) (*1)
+Added page and form where user can submit basic details for fantasy movie. Can log out and see the data user submits but didn't use that data anywhere yet.
+
+### Other.
+Attempted to split image gallery into separate component to change the detail pages layout. Wasn't able to get it to work.
+
+
+## Installation
+
+1. Clone the repository:  
+   `git clone https://github.com/Nikki9523/labMoviesApp.git`
+
+2. Navigate to the project directory:  
+   `cd ./moviesApp`
+
+3. Install dependencies:  
+   `npm install`
+
+4. Create .env file with api key for tmbd 
+   `VITE_TMDB_KEY=your-api-key`
+
+5. npm run dev
+
+6. go to local host 3000
